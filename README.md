@@ -1,1 +1,1 @@
-<center>Learning-on-CPP</center>
+<h1 align = center>Learning-on-CPP</h1>
