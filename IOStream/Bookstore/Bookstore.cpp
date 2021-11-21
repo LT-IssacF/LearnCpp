@@ -24,22 +24,22 @@ Sales_data add( const Sales_data &lhs, const Sales_data &rhs ) {
 
 int main( ) {
 	ifstream input( "input.txt" );
-	ofstream output( "output.txt" ); // ÒşÊ½½Ø¶ÏÎÄ¼ş
-	Sales_data total; // ±£´æÒ»±¾ÊéµÄÏúÊÛ×Ü¶î
-	if( read( input, total ) ) { // ¶ÁÈ¡µÚÒ»ÌõÏúÊÛ¼ÇÂ¼
-		Sales_data trans; // ±£´æÏÂÒ»±¾ÊéµÄÏúÊÛ¶î
-		while( read( input, trans ) ) { // ¶ÁÈ¡ÏÂÒ»ÌõÏúÊÛ¼ÇÂ¼
-			if( total.isbn( ) == trans.isbn( ) ) // ÊÇÍ¬Ò»±¾Êé
+	ofstream output( "output.txt" ); // éšå¼åœ°æˆªæ–­æ–‡ä»¶
+	Sales_data total; // ä¿å­˜ä¸€æœ¬ä¹¦çš„é”€å”®æ€»é¢
+	if( read( input, total ) ) { // è¯»å–ç¬¬ä¸€æ¡é”€å”®è®°å½•
+		Sales_data trans; // ä¿å­˜ä¸‹ä¸€æœ¬ä¹¦çš„é”€å”®é¢
+		while( read( input, trans ) ) { // è¯»å–ä¸‹ä¸€æ¡é”€å”®è®°å½•
+			if( total.isbn( ) == trans.isbn( ) ) // æ˜¯åŒä¸€æœ¬ä¹¦
 				total.combine( trans );
-			else { // ²»ÊÇÔò´òÓ¡ÉÏÒ»±¾µÄ½á¹û
+			else { // ä¸æ˜¯åˆ™æ‰“å°ä¸Šä¸€æœ¬çš„ç»“æœ
 				print( output, total ) << endl;
-				total = trans; // ¿ªÊ¼´¦ÀíÏÂÒ»±¾
+				total = trans; // å¼€å§‹å¤„ç†ä¸‹ä¸€æœ¬
 			}
 		}
-		print( output, total ); // ´¦Àí×îºóÒ»±¾
+		print( output, total ); // å¤„ç†æœ€åä¸€æœ¬
 		cout << "Record done!" << endl;
 	}
-	else // ÎÄ¼şÖĞÃ»ÓĞÊı¾İ
+	else // æ–‡ä»¶ä¸­æ²¡æœ‰æ•°æ®
 		cerr << "No data?!" << endl;
 	return 0;
 }
