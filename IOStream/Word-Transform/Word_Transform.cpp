@@ -4,38 +4,38 @@
 #include <map>
 #include <string>
 using namespace std;
-// ½¨Á¢×ª»»¹æÔò¼´Ó³Éä
-// ²ÎÊıÎªÒ»¸ö¶ÁÈ¡ÎÄ¼şÁ÷
+// å»ºç«‹è½¬æ¢è§„åˆ™å³æ˜ å°„map
+// å‚æ•°ä¸ºä¸€ä¸ªè¯»å–æ–‡ä»¶æµ
 map<string, string> BuildMap( ifstream &map_file ) {
 	map<string, string> trans_map;
-	string key, value; // ¼üºÍÖµ
-	// ¶ÁÈ¡µÚÒ»¸öµ¥´Ê´æÈëkey£¬ĞĞÖĞÊ£ÓàÄÚÈİ´æÈëvalue
+	string key, value; // é”®å’Œå€¼
+	// è¯»å–ç¬¬ä¸€ä¸ªå•è¯å­˜å…¥keyï¼Œè¡Œä¸­å‰©ä½™å†…å®¹å­˜å…¥value
 	while( map_file >> key && getline( map_file, value ) ) {
-		if( value.size( ) > 1 ) // Ìø¹ıÇ°µ¼¿Õ¸ñ
+		if( value.size( ) > 1 ) // è·³è¿‡å‰å¯¼ç©ºæ ¼
 			trans_map[key] = value.substr( 1 );
-		else // Êµ¼Ê¸ù¾İÌá¹©ÊäÈëÁ÷µÄĞÔÖÊ²»»á³öÏÖÒì³£
+		else // å®é™…æ ¹æ®æä¾›è¾“å…¥æµçš„æ€§è´¨ä¸ä¼šå‡ºç°å¼‚å¸¸
 			throw runtime_error( "no rule for " + key );
 	}
 	return trans_map;
 }
-// Êµ¼ÊµÄ×ª»»¹¤×÷
-// ²ÎÊıÎªÒ»¸ö´ı×ª»»µÄ×Ö·û´®¼´µ¥´ÊºÍ×ª»»¹æÔò
+// å®é™…çš„è½¬æ¢å·¥ä½œ
+// å‚æ•°ä¸ºä¸€ä¸ªå¾…è½¬æ¢çš„å­—ç¬¦ä¸²å³å•è¯å’Œè½¬æ¢è§„åˆ™
 const string &Transform( const string &s, const map<string, string> &trans_map ) {
 	auto map_it = trans_map.find( s );
 	auto map_end = trans_map.cend( );
-	if( map_it != map_end ) // Èç¹ûµ¥´ÊÔÚ×ª»»¹æÔòÖĞ
-		return map_it->second; // ·µ»ØÌæ»»¶ÌÓï
-	else // ²»ÔÚ¾ÍÔ­Â··µ»Ø
+	if( map_it != map_end ) // å¦‚æœå•è¯åœ¨è½¬æ¢è§„åˆ™ä¸­
+		return map_it->second; // è¿”å›æ›¿æ¢çŸ­è¯­
+	else // ä¸åœ¨å°±åŸè·¯è¿”å›
 		return s;
 }
-// ²ÎÊıÎªÁ½¸ö¶ÁÈ¡ÎÄ¼şÁ÷£¬Ç°ÕßÊÇ×ª»»¹æÔò£¬ºóÕßÊÇ´ı×ª»»ÎÄ±¾
+// å‚æ•°ä¸ºä¸¤ä¸ªè¯»å–æ–‡ä»¶æµï¼Œå‰è€…æ˜¯è½¬æ¢è§„åˆ™ï¼Œåè€…æ˜¯å¾…è½¬æ¢æ–‡æœ¬
 void Word_Transform( ifstream &map_file, ifstream &input ) {
 	auto trans_map = BuildMap( map_file );
 	string text;
-	while( getline( input, text ) ) { // ¶ÁÈëÊäÈëÁ÷Ã¿Ò»ĞĞ
-		istringstream stream( text ); // ¶ÁÈ¡Ã¿Ò»¸öµ¥´Ê
+	while( getline( input, text ) ) { // è¯»å…¥è¾“å…¥æµæ¯ä¸€è¡Œ
+		istringstream stream( text ); // è¯»å–æ¯ä¸€ä¸ªå•è¯
 		string word;
-		bool firstWord = true; // ¿ØÖÆµ¥´ÊÖ®¼äµÄ¿Õ¸ñ
+		bool firstWord = true; // æ§åˆ¶å•è¯ä¹‹é—´çš„ç©ºæ ¼
 		while( stream >> word ) {
 			if( firstWord == true )
 				firstWord = false;
@@ -43,7 +43,7 @@ void Word_Transform( ifstream &map_file, ifstream &input ) {
 				cout << " ";
 			cout << Transform( word, trans_map );
 		}
-		cout << endl; // Ò»ĞĞ½áÊø
+		cout << endl; // ä¸€è¡Œç»“æŸ
 	}
 }
 
