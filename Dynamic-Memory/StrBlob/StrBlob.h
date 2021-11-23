@@ -8,22 +8,22 @@ public:
 	typedef std::vector<std::string>::size_type size_type;
 	StrBlob( );
 	StrBlob( std::initializer_list<std::string> il );
-	// ÕâÁ½ÖÖ³ÉÔ±º¯Êı²»ĞèÒª¸Ä±äÔªËØ£¬ËùÒÔÖ±½ÓÀûÓÃµ×²ãµÄvectorµÄÏà¶ÔÓ¦³ÉÔ±À´Íê³É¹¤×÷
+	// è¿™ä¸¤ç§æˆå‘˜å‡½æ•°ä¸éœ€è¦æ”¹å˜å…ƒç´ ï¼Œæ‰€ä»¥ç›´æ¥åˆ©ç”¨åº•å±‚çš„vectorçš„ç›¸å¯¹åº”æˆå‘˜æ¥å®Œæˆå·¥ä½œ
 	size_type size( ) const { return data->size( ); };
 	bool empty( ) const { return data->empty( ); };
-	// ĞèÒªÌí¼Ó»òÉ¾³ı£¬µ«Ìí¼ÓÃ»ÓĞÏŞÖÆ£¬ËùÒÔÒ²¿ÉÒÔÈçÉÏ
+	// éœ€è¦æ·»åŠ æˆ–åˆ é™¤ï¼Œä½†æ·»åŠ æ²¡æœ‰é™åˆ¶ï¼Œæ‰€ä»¥ä¹Ÿå¯ä»¥å¦‚ä¸Š
 	void push_back( const std::string &t ) { return data->push_back( t ); }
 	void pop_back( );
-	// ¶ÔÔªËØ½øĞĞ·ÃÎÊ£¬·µ»Ø×óÖµ
+	// å¯¹å…ƒç´ è¿›è¡Œè®¿é—®ï¼Œè¿”å›å·¦å€¼
 	const std::string &front( ) const;
 	const std::string &back( ) const;
 private:
 	std::shared_ptr<std::vector<std::string>> data;
 	void check( size_type i, const std::string &msg ) const;
 };
-// ÎŞ²Î³õÊ¼»¯£¬·ÖÅäÒ»¸ö¿Õvector
+// æ— å‚åˆå§‹åŒ–ï¼Œåˆ†é…ä¸€ä¸ªç©ºvector
 StrBlob::StrBlob( ) : data( std::make_shared<std::vector<std::string>>( ) ) { };
-// ÓÃinitializer_list³õÊ¼»¯vector
+// ç”¨initializer_liståˆå§‹åŒ–vector
 StrBlob::StrBlob( std::initializer_list<std::string> il ) :
 	data( std::make_shared<std::vector<std::string>>( il ) ) { };
 void StrBlob::check( size_type i, const std::string &msg ) const {
