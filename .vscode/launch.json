@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "windows": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "D:/MinGW/bin/gdb.exe",
+                "program": "${workspaceFolder}/output/main.exe"
+            },
+            "preLaunchTask": "CMake Build"
+        }
+    ]
+}
