@@ -1,9 +1,28 @@
-## 学了忘，忘了学，反反复复，其乐无穷
+## 学了忘，忘了学
 ----------------------------------
-### How to run these code?
-1. mkdir build
-2. cd build
-3. cmake ..
-4. make
-5. cd ../output
-6. ./main
+### choose the program want to test then modify CMakeLists in the source dir
+### then launch the terminal
+1. build the configure folder in the source dir
+```
+  mkdir build
+```
+2. go to the build folder which just touch
+```
+  cd build
+```
+3. build the Makefile
+```
+cmake ..
+```
+4. configure
+```
+  make
+```
+5. go to the output folder in the source dir
+```
+  cd ../output
+```
+6. use .exe
+```
+  ./main
+```
