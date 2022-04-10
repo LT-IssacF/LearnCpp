@@ -12,7 +12,7 @@
 ```
 3. build the Makefile
 ```
-cmake ..
+  cmake ..
 ```
 4. configure
 ```
