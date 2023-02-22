@@ -17,6 +17,9 @@ public:
 	Sales_data(const Sales_data &rhs);
 	Sales_data &operator=(const Sales_data &rhs);
 
+	Sales_data(Sales_data &&rhs) = default;
+	Sales_data &operator=(Sales_data &&rhs) = default;
+
 	Sales_data(std::istream &is);
 
 	std::string isbn() const;
