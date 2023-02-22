@@ -2,7 +2,10 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <Sales_data.h>
+#include "LearnCppConfig.h"
+#ifdef USE_SALES_DATA
+#include "Sales_data.h"
+#endif
 
 int main() {
 	std::ifstream is("../src/IOStream/Bookstore/input.txt");
