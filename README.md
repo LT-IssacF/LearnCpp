@@ -10,19 +10,15 @@
 ```
   cd build
 ```
-3. build the Makefile
+3. configure the MinGW Makefiles
 ```
-  cmake ..
+  cmake -G "MinGW Makefiles" ..
 ```
-4. configure
+4. build the target
 ```
-  make
+  cmake --build .
 ```
-5. go to the output folder in the source dir
+5. insatll
 ```
-  cd ../output
-```
-6. use .exe
-```
-  ./main
+  cmake --install . --prefix "your file path"
 ```
