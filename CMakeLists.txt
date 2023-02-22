@@ -1,33 +1,34 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(LearnCPP)
+project(LearnCpp VERSION 1.0)
 
-# 设置可执行文件的生成目录
-set(EXECUTABLE_OUTPUT_PATH ${LearnCPP_SOURCE_DIR}/output)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-option(USE_SALES_DATA "Use Sales_data" OFF)
+add_definitions(-DNOMINMAX)
 
-if(DEFINED USE_SALES_DATA)
+# 设置可执行文件的生成目录(改变二进制文件输出目录)
+# set(EXECUTABLE_OUTPUT_PATH ${LearnCPP_SOURCE_DIR}/output)
+
+option(USE_SALES_DATA "Sales_data" ON)
+
+if(USE_SALES_DATA)
     message(STATUS "Sales_data: " ${USE_SALES_DATA})
 
-    add_definitions(-DUSE_SALES_DATA)
+    # add_definitions(-DUSE_SALES_DATA)
 
     # 告诉cmake去include下找CMakeLists.txt文件，其Makefile文件放在bin下
-    add_subdirectory(${CMAKE_SOURCE_DIR}/include bin)
-
-    # 告诉cmake去include文件下找头文件
-    include_directories(${CMAKE_SOURCE_DIR}/include)
-
-    # 添加需要链接的库文件
-    link_libraries(Sales_data)
+    add_subdirectory(include)
 
     list(APPEND EXTRA_LIBS Sales_data)
-    list(APPEND EXTRA_INCLUDES "${CMAKE_SOURCE_DIR}/include")
-endif(USE_SALES_DATA)
+    # list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/include")
+endif()
+
+configure_file(LearnCppConfig.h.in LearnCppConfig.h)
 
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" -g -O2 -Wall)
 
-set(CMAKE_BUILD_TYPE Debug)
+# set(CMAKE_BUILD_TYPE Debug)
 
 set(IOStream src/IOStream)
 set(DynamicMemory src/DynamicMemory)
@@ -36,17 +37,30 @@ set(Bookstore ${IOStream}/Bookstore/Bookstore.cpp)
 set(PhoneNum ${IOStream}/PhoneNum/PhoneNum.cpp)
 set(WordTransformation ${IOStream}/WordTransformation/WordTransformation.cpp)
 
-message(STATUS "This is binary dir " ${LearnCPP_BINARY_DIR})
-message(STATUS "This is source dir " ${LearnCPP_SOURCE_DIR})
+message(STATUS "This is binary dir " ${PROJECT_BINARY_DIR})
+message(STATUS "This is source dir " ${PROJECT_SOURCE_DIR})
 
-add_executable(main ${Bookstore})
+add_executable(main ${Bookstore} ${PROJECT_BINARY_DIR}/LearnCppConfig.h)
 # add_executable(main ${PhoneNum})
 # add_executable(main ${WordTransformation})
 
-target_include_directories(main PUBLIC ${EXTRA_INCLUDES})
+# 链接库到.exe上
+# target_link_libraries(main PUBLIC Sales_data)
+target_link_libraries(main PUBLIC ${EXTRA_LIBS})
+
+# target_include_directories(main PUBLIC ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR}/include)
+# target_include_directories(main PUBLIC "${PROJECT_BINARY_DIR}" ${EXTRA_INCLUDES})
+target_include_directories(main PUBLIC ${PROJECT_BINARY_DIR})
 
 # link_directories(${CMAKE_SOURCE_DIR}/lib)
 
-# 链接库到.exe上
-target_link_libraries(main PUBLIC ${EXTRA_LIBS})
-# target_link_libraries(main PUBLIC Sales_data)
+install(TARGETS main DESTINATION bin)
+install(FILES "${PROJECT_BINARY_DIR}/LearnCppConfig.h" DESTINATION include)
+install(FILES "${IOStream}/Bookstore/input.txt" DESTINATION src/IOStream/Bookstore)
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${LearnCpp_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${LearnCpp_VERSION_MINOR}")
+set(CPACK_SOURCE_GENERATOR "TGZ")
+include(CPack)
