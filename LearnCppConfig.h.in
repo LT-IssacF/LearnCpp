@@ -1,3 +1,4 @@
 #define LearnCpp_VERSION_MAJOR @LearnCpp_VERSION_MAJOR@
 #define LearnCpp_VERSION_MINOR @LearnCpp_VERSION_MINOR@
 #cmakedefine USE_SALES_DATA
+#cmakedefine USE_BITREE
