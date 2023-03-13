@@ -1,3 +1,5 @@
+#ifndef SALES_DATA_H
+#define SALES_DATA_H
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -32,3 +34,4 @@ private:
 	unsigned int units_sold;
 	double revenue;
 };
+#endif
